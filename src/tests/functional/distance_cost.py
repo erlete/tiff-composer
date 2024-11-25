@@ -91,6 +91,4 @@ plt.ylabel('Execution Time (seconds)')
 plt.title('Execution Time for Distance Calculation with Varying Steps')
 plt.legend()
 plt.grid(True)
-raise ValueError()
-
 plt.show()

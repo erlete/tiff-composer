@@ -7,7 +7,11 @@ from tiffcomposer.core.coordinates import GeoCoordinate, GeoCoordinateExtent
 from tiffcomposer.utils.extent import get_population_density_in_extent
 from tiffcomposer.utils.pixel import get_value_from_coordinates
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), 'esp_pd_2020_1km.tif')
+FILE_PATH = os.path.join(
+    os.path.dirname(__file__),
+    "data",
+    "esp_pd_2020_1km.tif"
+)
 MADRID = GeoCoordinate(40.4168, -3.7026)  # Madrid, Spain
 
 # Open the TIFF file
@@ -25,7 +29,7 @@ with rasterio.open(FILE_PATH) as src:
     fig, ax = plt.subplots()
     img = ax.imshow(
         data,
-        cmap='viridis',
+        cmap="viridis",
         extent=(
             src.bounds.left,
             src.bounds.right,
@@ -34,9 +38,9 @@ with rasterio.open(FILE_PATH) as src:
         )
     )
     plt.colorbar(img, ax=ax)  # Adds a colorbar to understand the value scale
-    ax.set_title('Population Density')
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
+    ax.set_title("Population Density")
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
     plt.show()
 
 
@@ -53,11 +57,11 @@ with rasterio.open(FILE_PATH) as src:
     extent_r = 1
     extent = GeoCoordinateExtent(
         GeoCoordinate(
-            MADRID.latitude - extent_r,
+            MADRID.latitude + extent_r,
             MADRID.longitude - extent_r
         ),
         GeoCoordinate(
-            MADRID.latitude + extent_r,
+            MADRID.latitude - extent_r,
             MADRID.longitude + extent_r
         )
     )
@@ -65,20 +69,20 @@ with rasterio.open(FILE_PATH) as src:
     mean_density = get_population_density_in_extent(
         extent,
         src,
-        mode='mean'
+        mode="mean"
     )
     print(f"Mean population density in the extent: {mean_density} people/km^2")
 
     max_density = get_population_density_in_extent(
         extent,
         src,
-        mode='max'
+        mode="max"
     )
     print(f"Max population density in the extent: {max_density} people/km^2")
 
     min_density = get_population_density_in_extent(
         extent,
         src,
-        mode='min'
+        mode="min"
     )
     print(f"Min population density in the extent: {min_density} people/km^2")
