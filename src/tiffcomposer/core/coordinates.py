@@ -91,8 +91,8 @@ class GeoCoordinate:
         lat_rad = radians(latitude)
 
         radius = sqrt(
-            (a**2 * cos(lat_rad))**2 + (b**2 * sin(lat_rad))**2
-            / (a * cos(lat_rad))**2 + (b * sin(lat_rad))**2
+            ((a**2 * cos(lat_rad))**2 + (b**2 * sin(lat_rad))**2) /
+            ((a * cos(lat_rad))**2 + (b * sin(lat_rad))**2)
         )
 
         return radius
